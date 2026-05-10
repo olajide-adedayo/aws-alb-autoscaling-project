@@ -105,6 +105,126 @@ Apache Web Server Deployment
 Cloud Architecture Design
 High Availability Systems
 
+## 🚀 CloudWatch CPU Monitoring & Alarm Project
 
-##  👨‍💻 Author
-Olajide Adedayo
+# AWS EC2 CPU Monitoring with CloudWatch & SNS Notifications
+
+## 📌 Project Overview
+
+This project demonstrates a real-world AWS monitoring and alerting solution using Amazon CloudWatch and SNS. The system monitors EC2 CPU utilization and triggers automated alerts when a defined threshold is exceeded.
+
+The goal is to simulate a production-grade observability setup commonly used in DevOps and Cloud Operations environments.
+
+---
+
+## 🏗️ AWS Architecture
+
+*Workflow:*
+
+EC2 Instance → CPU Utilization Metric → CloudWatch Alarm → SNS Notification → Email Alert
+
+---
+
+## ☁️ AWS Services Used
+
+- Amazon EC2 (Virtual Server)
+- Amazon CloudWatch (Monitoring & Metrics)
+- Amazon CloudWatch Alarms
+- Amazon SNS (Simple Notification Service)
+- IAM (Identity and Access Management)
+- AWS Systems Manager (Session Manager)
+
+---
+
+## ⚙️ Implementation Steps
+
+### 1. EC2 Instance Setup
+- Launched an EC2 instance named devops-server-1
+- Configured IAM role with Systems Manager permissions
+- Enabled Session Manager access
+
+---
+
+### 2. CPU Load Simulation
+- Installed stress testing tool on EC2:
+```bash
+sudo yum install stress -y
+
+### Simulated CPU load:
+stress --cpu 8 --timeout 600
+
+### 3. CloudWatch Metrics Configuration
+- Navigated to CloudWatch Metrics
+- Selected:
+  - EC2 → Per-Instance Metrics
+  - CPUUtilization for instance ID
+
+---
+
+### 4. CloudWatch Alarm Setup
+- Created alarm based on CPUUtilization metric
+- Conditions:
+  - Threshold: CPU > 30%
+  - Period: 1 minute
+  - Evaluation: 1 out of 1 datapoint
+
+---
+
+### 5. SNS Notification Setup
+- Created SNS topic: cpu-alarm-topic
+- Subscribed email endpoint
+- Confirmed subscription via email
+
+---
+
+### 6. Alarm Testing
+- Triggered CPU load using stress tool
+- CloudWatch detected CPU spike
+- Alarm transitioned from OK → ALARM
+- SNS email notification received successfully
+
+---
+
+## 📊 Screenshots Evidence
+
+### Alarm State (IN ALARM)
+![Alarm State](screenshots/screenshot-01-alarm-state.png)
+
+### CPU Utilization Graph
+![CPU Graph](screenshots/screenshot-02-cpu-graph.png)
+
+### EC2 Instance Running
+![EC2 Instance](screenshots/screenshot-03-ec2-running.png)
+
+### Session Manager / CPU Stress Execution
+![Session Manager](screenshots/screenshot-04-session-manager.png)
+
+### SNS Email Notification
+![SNS Email](screenshots/screenshot-05-sns-email.png)
+
+---
+
+## 🎯 Key Learning Outcomes
+
+- AWS EC2 monitoring and performance testing
+- CloudWatch metrics and alarm configuration
+- Real-time alerting using SNS
+- IAM role integration for EC2 and Systems Manager
+- End-to-end observability pipeline design
+
+---
+
+## 🚀 Conclusion
+
+This project demonstrates a complete AWS monitoring and alerting pipeline suitable for production environments. It reflects real-world DevOps practices for infrastructure monitoring, incident detection, and automated notifications.
+
+---
+
+## 👨‍💻 Author
+
+*Name:* Olajide Adedayo  
+*Role:* AWS Cloud & DevOps Engineer (Learning Project)  
+*Platform:* GitHub Portfolio Project
+
+
+
